@@ -1,0 +1,1 @@
+module.exports.bithumbService = require("./bithumb.service")

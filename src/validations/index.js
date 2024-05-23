@@ -1,0 +1,1 @@
+module.exports.serviceOrderValidation = require('./serviceOrders.validation')

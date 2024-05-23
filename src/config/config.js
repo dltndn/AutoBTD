@@ -10,16 +10,19 @@ const envVarSchema = joi.object()
         PORT: joi.number().default(12050),
 
         // serverIp 관련
-        // NETWORK_APP_SERVER_URL: joi.string().required(),
+        BITHUMB_API: joi.string().required(),
 
+        // api key 관련
+        BITHUMB_API_KEY: joi.string().required(),
+        BITHUMB_SECRET_KEY: joi.string().required(),
 
         // sql 관련
-        SQL_HOST: joi.string().required(),
-        SQL_PORT: joi.number().required(),
-        SQL_DATABASE: joi.string().required(),
-        SQL_USERNAME: joi.string().required(),
-        SQL_PASSWORD: joi.string().required(),
-        SQL_DIALECT: joi.string().required().valid('mysql', 'postgres', 'mssql', 'mariadb'),
+        // SQL_HOST: joi.string().required(),
+        // SQL_PORT: joi.number().required(),
+        // SQL_DATABASE: joi.string().required(),
+        // SQL_USERNAME: joi.string().required(),
+        // SQL_PASSWORD: joi.string().required(),
+        // SQL_DIALECT: joi.string().required().valid('mysql', 'postgres', 'mssql', 'mariadb'),
     })
     .unknown();
 
@@ -34,14 +37,19 @@ module.exports = {
     port: envVars.PORT,
 
     // serverIp 관련
+    bithumbApi: envVars.BITHUMB_API,
+
+    // api key 관련
+    bithumbApiKey: envVars.BITHUMB_API_KEY,
+    bithumbSecretKey: envVars.BITHUMB_SECRET_KEY,
 
     // sql 관련
-    sequelize: {
-        database: envVars.SQL_DATABASE + (envVars.NODE_ENV === 'development' || envVars.NODE_ENV === 'test' ? '_dev' : ''),
-        username: envVars.SQL_USERNAME,
-        password: envVars.SQL_PASSWORD,
-        host: envVars.SQL_HOST,
-        port: envVars.SQL_PORT,
-        dialect: envVars.SQL_DIALECT,
-    },
+    // sequelize: {
+    //     database: envVars.SQL_DATABASE + (envVars.NODE_ENV === 'development' || envVars.NODE_ENV === 'test' ? '_dev' : ''),
+    //     username: envVars.SQL_USERNAME,
+    //     password: envVars.SQL_PASSWORD,
+    //     host: envVars.SQL_HOST,
+    //     port: envVars.SQL_PORT,
+    //     dialect: envVars.SQL_DIALECT,
+    // },
 };

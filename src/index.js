@@ -1,24 +1,29 @@
 const app = require('./app');
 const config = require('./config/config');
-const {sequelize} = require('./models');
+// const {sequelize} = require('./models');
 
 let server;
 
 (async () => {
    try {
       // sequelize 관련
-      sequelize.sync({alter: true})
-        .then(async () => {
-           // 서버 실행 관련
-           server = app.listen(config.port, () => {
-              logger.info('Listening to port %d', config.port);
-           })
-           server.keepAliveTimeout = 61 * 1000;
-           server.headersTimeout = 65 * 1000; // This should be bigger than `keepAliveTimeout + your server's expected response time`
-        })
-        .catch((err) => {
-           console.log(err);
-        });
+    //   sequelize.sync({alter: true})
+    //     .then(async () => {
+    //        // 서버 실행 관련
+    //        server = app.listen(config.port, () => {
+    //           console.log('Listening to port %d', config.port);
+    //        })
+    //        server.keepAliveTimeout = 61 * 1000;
+    //        server.headersTimeout = 65 * 1000; // This should be bigger than `keepAliveTimeout + your server's expected response time`
+    //     })
+    //     .catch((err) => {
+    //        console.log(err);
+    //     });
+        server = app.listen(config.port, () => {
+            console.log('Listening to port %d', config.port);
+         })
+         server.keepAliveTimeout = 61 * 1000;
+         server.headersTimeout = 65 * 1000; // This should be bigger than `keepAliveTimeout + your server's expected response time`
    } catch(e) {
       console.error(e);
       exitHandler();
@@ -28,7 +33,7 @@ let server;
 const exitHandler = () => {
    if(server) {
       server.close(() => {
-         logger.info('Server closed');
+         console.log('Server closed');
          process.exit(1);
       })
    } else {
@@ -37,7 +42,7 @@ const exitHandler = () => {
 }
 
 const unexpectedErrorHandler = (error) => {
-   logger.error(error);
+   console.error(error);
    exitHandler();
 }
 
